@@ -6,17 +6,14 @@ CC			= nasm
 
 FLAGS		= -f macho64
 
+.s.o:
+	$(CC) $(FLAGS) $< -o $(<:.s=.o)
+
 NAME		=	libasm.a
 
 RM			=	rm -f
 
-$(NAME):	$(SRCS)
-	nasm -f macho64 ft_strlen.s
-	nasm -f macho64 ft_strcpy.s
-	nasm -f macho64 ft_strcmp.s
-	nasm -f macho64 ft_write.s
-	nasm -f macho64 ft_read.s
-	nasm -f macho64 ft_strdup.s
+$(NAME):	$(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 	
 all:		$(NAME)
